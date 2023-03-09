@@ -1,5 +1,6 @@
 const Usuario = require("../model/usuarioModel");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const crearUsuario = async (req, res) => {
     const {name, email, password} = req.body;
@@ -22,11 +23,23 @@ const crearUsuario = async (req, res) => {
         //aca guardo los usuarios en DB
         await usuario.save();
 
+        //generar JWT
+        const payload = {
+            id: usuario._id,
+            name: usuario.name,
+            rol: usuario.rol,
+        };
+
+        const token = jwt.sign(payload, process.env.SECRET_JWT,{
+            expiresIn: "1h",
+        })
+
         res.status(201).json({
             ok: true,
             uid: usuario.id,
             name: usuario.name,
             rol: usuario.rol,
+            token,
         });
     } catch (error) {
         console.log(error);
@@ -64,11 +77,23 @@ const loginUsuario = async (req,res) =>{
             })
         }
 
+        //generar JWT
+        const payload = {
+            id: usuario._id,
+            name: usuario.name,
+            rol: usuario.rol,
+        };
+
+        const token = jwt.sign(payload, process.env.SECRET_JWT,{
+            expiresIn: "1h",
+        })
+
         res.status(201).json({
             ok: true,
             uid: usuario.id,
             name: usuario.name,
             rol: usuario.rol,
+            token,
         });
     } catch (error) {
         console.log(error);
