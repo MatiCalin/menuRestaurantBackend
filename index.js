@@ -17,6 +17,7 @@ app.use(cors());
 app.use(express.static("public"));
 
 app.use("/auth", require("./routes/auth"));
+app.use("/admin",require("./routes/admin"));
 
 //llamar servidor
 

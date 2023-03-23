@@ -30,5 +30,6 @@ routerAuth.post("/",
     ] 
     
     ,loginUsuario); //ruta para login de usuario
+    
 
 module.exports = routerAuth;
