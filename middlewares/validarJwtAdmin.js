@@ -13,7 +13,7 @@ const validarJWTAdmin = (req, res, next) =>{
 
     try {
         const payload = jwt.verify(token, process.env.SECRET_JWT);
-        if (payload.usuario === "usuario"){
+        if (payload.rol === "usuario"){
             return res.status(404).json({
                 ok: false,
                 msg: "usuario no tiene rol de admin",
