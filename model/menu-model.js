@@ -2,19 +2,27 @@
 const {Schema, model} = require("mongoose");
 
 const MenuSchema = Schema({
-    name: {
+    nombre: {
         type: String,
         required: true,
+    },
+    detalle: {
+        type: String,
+        requiered: true,
+    },
+    estado: {
+        type: String,
+        requiered: true,
     },
     precio: {
         type: String,
         requiered: true,
     },
-    cantidad: {
+    categoria: {
         type: String,
         requiered: true,
     },
-    descripcion: {
+    imageUrl: {
         type: String,
         requiered: true,
     }

@@ -1,17 +1,20 @@
 const express = require("express");
 const { check } = require("express-validator");
-const { crearMenu, cargarMenus, cargarUsuarios, verificarRol, verificarAdmin, } = require("../controllers/admin");
+const { crearMenu, cargarMenus, cargarUsuarios, verificarRol, verificarAdmin, eliminarMenu, editarMenu, } = require("../controllers/admin");
 const { validarCampos } = require("../middlewares/validarCampos");
 const { validarJWT } = require("../middlewares/validarJwt");
 const { validarJWTAdmin } = require("../middlewares/validarJwtAdmin");
 const routerAdmin = express.Router();
 
 routerAdmin.post ("/new", 
-[
-    check ("name","el nombre es obligatorio").not().isEmpty(),
-    check ("precio","el precio es obligatorio").not().isEmpty(),
-    check ("cantidad","la cantidad es obligatoria").not().isEmpty(),
-    check ("descripcion","la descripcion es obligatoria").not().isEmpty(),
+[   
+    validarJWT,
+    check ("nombre","el nombre es obligatorio").not().isEmpty(),
+    check ("detalle","el detalle es obligatorio").not().isEmpty(),
+    check ("estado","el estado es obligatoria").not().isEmpty(),
+    check ("precio","el precio es obligatoria").not().isEmpty(),
+    check ("categoria","la categoria es obligatoria").not().isEmpty(),
+    check ("imageUrl","la url de la imagen es obligatoria").not().isEmpty(),
 
 
     
@@ -20,11 +23,14 @@ routerAdmin.post ("/new",
 crearMenu
 );
 
-routerAdmin.get('/Menus', cargarMenus);
+routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);
 
 routerAdmin.get("/nav", validarJWT ,verificarRol);
 routerAdmin.get("/verificar", validarJWTAdmin ,verificarAdmin);
+
+routerAdmin.delete("/eliminar/:id", validarJWT, eliminarMenu);
+routerAdmin.put("/editar",validarJWT, editarMenu);
 
 
 
