@@ -8,23 +8,27 @@ const MenuSchema = Schema({
     },
     detalle: {
         type: String,
-        requiered: true,
+        required: true,
     },
     estado: {
         type: String,
-        requiered: true,
+        required: true,
     },
     precio: {
-        type: String,
-        requiered: true,
+        type: Number,
+        required: true,
     },
-    categoria: {
-        type: String,
-        requiered: true,
+    categorias: {
+        type: Schema.Types.ObjectId,
+        ref: 'Categoria'
     },
     imageUrl: {
         type: String,
-        requiered: true,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        default: 1
     }
     
 });

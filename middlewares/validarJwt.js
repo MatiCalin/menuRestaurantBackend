@@ -13,7 +13,6 @@ const validarJWT = (req, res, next) =>{
 
     try {
         const payload = jwt.verify(token, process.env.SECRET_JWT)
-
         req.rol = payload.rol;
     } catch (error) {
         return res.status(401).json({
