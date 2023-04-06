@@ -1,8 +1,10 @@
 const express = require("express");
 const { check } = require("express-validator");
 const {
-    crearCategoria,
     cargarCategorias,
+    crearCategoria,
+    editarCategoria,
+    eliminarCategoria,
     crearPedido,
     cargarPedidos,
     crearMenu,
@@ -58,17 +60,15 @@ crearMenu
 );*/
 
 routerAdmin.get('/categorias', validarJWT, cargarCategorias);
-/*
-routerAdmin.post('/categorias', validarJWT, crearCategorias);
-routerAdmin.put('/categorias/:id', validarJWT, editarCategorias);
-routerAdmin.delete('/categorias/:id', validarJWT, eliminarCategorias);
 
-routerAdmin.get('/pedidos', validarJWT, cargarPedidos);
-routerAdmin.post('/pedidos', validarJWT, crearPedidos);
-routerAdmin.put('/pedidos/:id', validarJWT, editarPedidos);
-routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedidos);
-*/
+routerAdmin.post('/categorias', validarJWT, crearCategoria);
+routerAdmin.put('/categorias', validarJWT, editarCategoria);
+routerAdmin.delete('/categoria/:id', validarJWT, eliminarCategoria);
 
+/*routerAdmin.get('/pedidos', validarJWT, cargarPedidos);*/
+/*routerAdmin.post('/pedidos', validarJWT, crearPedidos);*/
+/*routerAdmin.put('/pedidos/:id', validarJWT, editarPedidos);*/
+/*routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedidos);*/
 
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);

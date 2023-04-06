@@ -3,6 +3,22 @@ const Usuario = require('../model/usuarioModel');
 const Categoria = require('../model/categoriaModel');
 const Pedido = require('../model/pedidosModel');
 
+// Carga de Categorías
+const cargarCategorias = async (req,res) => {
+    try {
+        const categorias = await Categoria.find();
+        res.status(200).json({
+            ok: true,
+            categorias,
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Comuníquese con el administrador",
+        });
+    }
+};
+
 // Crear Categoría
 const crearCategoria = async (req,res) =>{
     try {
@@ -18,26 +34,71 @@ const crearCategoria = async (req,res) =>{
         console.log (error)
         res.status(500).json({
             ok: true,
-            msg: 'Pongase en contacto con el administrador',
+            msg: 'Póngase en contacto con el administrador',
         });
     }
 };
 
-// Carga de Categorías
-const cargarCategorias = async (req,res) => {
+// Editar categoría
+const editarCategoria = async (req, res) => {
     try {
-        const categorias = await Categoria.find()
+        const editCategory = await Categoria.findById(req.body._id);
+
+        if (!editCategory) {
+            return res.status(404).json({
+                ok: false,
+                msg: "No existe ninguna categoría con esta Id"
+            });
+        }
+        const updateCategory = await Categoria.findByIdAndUpdate(
+            req.body._id,
+            req.body
+        );
         res.status(200).json({
-            ok: true,
-            categorias,
+            ok:true,
+            updateCategory,
         });
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Comuniquese con el administrador",
+            msg: "Comuníquese con el administrador",
         });
     }
-};
+}
+
+// Eliminar categoría
+const eliminarCategoria = async (req, res) => {
+    try {
+        let menu = [];
+        const deleteCategory = await Categoria.findById(req.params.id);
+        menu = await Menu.find({});
+        const menuFilter = menu.filter((menu) => menu.categorias == req.params.id);
+
+        if(menuFilter.length > 0 ) {
+            return res.status(200).json({
+                ok: false,
+                msg: 'No es posible eliminar la categoría ya que se encuentra relacionada a un menú'
+            });
+        }
+
+        if (!deleteCategory){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe una categoría con esta ID'
+            });
+        }
+        await Categoria.findByIdAndDelete(req.params.id);
+        res.status(200).json ({
+            ok: true,
+            msg:'categoría eliminada',
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Comuníquese con el administrador",
+        });
+    }
+}
 
 // Crear Pedido
 const crearPedido = async (req,res) =>{
@@ -219,8 +280,10 @@ const editarMenu = async(req,res) =>{
 }
 
 module.exports = {
-    crearCategoria,
     cargarCategorias,
+    crearCategoria,
+    editarCategoria,
+    eliminarCategoria,
     crearPedido,
     cargarPedidos,
     crearMenu,
