@@ -43,15 +43,38 @@ routerAdmin.post ("/new",
 ],
 crearMenu
 );
+/*routerAdmin.post ("/updateMenu",
+    [
+        validarJWT,
+        check ("nombre","el nombre es obligatorio").not().isEmpty(),
+        check ("detalle","el detalle es obligatorio").not().isEmpty(),
+        check ("estado","el estado es obligatoria").not().isEmpty(),
+        check ("precio","el precio es obligatoria").not().isEmpty(),
+        check ("categorias","la categoria es obligatoria").not().isEmpty(),
+        check ("imageUrl","la url de la imagen es obligatoria").not().isEmpty(),
+        validarCampos
+    ],
+    editarMenu
+);*/
 
-routerAdmin.get('/Categorias', validarJWT, cargarCategorias);
-routerAdmin.get('/Pedidos', validarJWT, cargarPedidos);
+routerAdmin.get('/categorias', validarJWT, cargarCategorias);
+/*
+routerAdmin.post('/categorias', validarJWT, crearCategorias);
+routerAdmin.put('/categorias/:id', validarJWT, editarCategorias);
+routerAdmin.delete('/categorias/:id', validarJWT, eliminarCategorias);
+
+routerAdmin.get('/pedidos', validarJWT, cargarPedidos);
+routerAdmin.post('/pedidos', validarJWT, crearPedidos);
+routerAdmin.put('/pedidos/:id', validarJWT, editarPedidos);
+routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedidos);
+*/
+
+
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);
 
 routerAdmin.get("/nav", validarJWT ,verificarRol);
 routerAdmin.get("/verificar", validarJWTAdmin ,verificarAdmin);
-
 routerAdmin.delete("/eliminar/:id", validarJWT, eliminarMenu);
 routerAdmin.put("/editar",validarJWT, editarMenu);
 

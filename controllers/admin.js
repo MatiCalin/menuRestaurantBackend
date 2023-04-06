@@ -194,6 +194,7 @@ const eliminarMenu =async (req,res) => {
 const editarMenu = async(req,res) =>{
     try {
         const menuEditar = await Menu.findById(req.body._id);
+
         if (!menuEditar) {
             return res.status(404).json({
                 ok: false,
