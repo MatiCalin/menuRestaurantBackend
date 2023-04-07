@@ -90,7 +90,7 @@ const eliminarCategoria = async (req, res) => {
         await Categoria.findByIdAndDelete(req.params.id);
         res.status(200).json ({
             ok: true,
-            msg:'categoría eliminada',
+            msg:'¡Categoría eliminada!',
         });
     } catch (error) {
         res.status(500).json({
@@ -132,7 +132,7 @@ const crearPedido = async (req,res) =>{
 // Carga de Pedidos
 const cargarPedidos = async (req,res) => {
     try {
-        const pedidos = await Pedido.find({});
+        const pedidos = await Pedido.find({}).populate("usuario", '-password -rol');
         res.status(200).json({
             ok: true,
             pedidos,
@@ -140,7 +140,7 @@ const cargarPedidos = async (req,res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: "Comuniquese con el administrador",
+            msg: "Comuníquese con el administrador",
         });
     }
 };
@@ -164,6 +164,35 @@ const crearMenu = async (req,res) =>{
             });
     }
 };
+
+// Editar pedido
+const editarPedido = async (req, res) => {
+    try {
+        const respOrder = await Pedido.findById(req.body._id);
+        if (!respOrder) {
+            return res.status(404).json({
+                ok: false,
+                msg: "No existe ningún pedido con esta Id"
+            });
+        }
+
+        const statusChange = { estado: req.body.orderFilter[0].estado}
+        const updateOrder = await Pedido.findByIdAndUpdate(
+            req.body._id,
+            statusChange
+        );
+
+        res.status(200).json({
+            ok:true,
+            updateOrder,
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Comuníquese con el administrador",
+        });
+    }
+}
 
 // Carga de Menús
 const cargarMenus = async (req,res) => {
@@ -286,6 +315,7 @@ module.exports = {
     eliminarCategoria,
     crearPedido,
     cargarPedidos,
+    editarPedido,
     crearMenu,
     cargarMenus,
     cargarUsuarios,

@@ -7,6 +7,7 @@ const {
     eliminarCategoria,
     crearPedido,
     cargarPedidos,
+    editarPedido,
     crearMenu,
     cargarMenus,
     cargarUsuarios,
@@ -65,10 +66,10 @@ routerAdmin.post('/categorias', validarJWT, crearCategoria);
 routerAdmin.put('/categorias', validarJWT, editarCategoria);
 routerAdmin.delete('/categoria/:id', validarJWT, eliminarCategoria);
 
-/*routerAdmin.get('/pedidos', validarJWT, cargarPedidos);*/
-/*routerAdmin.post('/pedidos', validarJWT, crearPedidos);*/
-/*routerAdmin.put('/pedidos/:id', validarJWT, editarPedidos);*/
-/*routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedidos);*/
+routerAdmin.get('/pedidos', validarJWT, cargarPedidos);
+routerAdmin.post('/pedidos', validarJWT, crearPedido);
+routerAdmin.put('/pedidos', validarJWT, editarPedido);
+/*routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedido);*/
 
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);
