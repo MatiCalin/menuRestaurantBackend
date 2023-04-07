@@ -69,7 +69,6 @@ routerAdmin.delete('/categoria/:id', validarJWT, eliminarCategoria);
 routerAdmin.get('/pedidos', validarJWT, cargarPedidos);
 routerAdmin.post('/pedidos', validarJWT, crearPedido);
 routerAdmin.put('/pedidos', validarJWT, editarPedido);
-/*routerAdmin.delete('/pedidos/:id', validarJWT, eliminarPedido);*/
 
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);
