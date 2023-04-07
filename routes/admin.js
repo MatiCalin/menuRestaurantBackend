@@ -8,6 +8,7 @@ const {
     crearPedido,
     cargarPedidos,
     editarPedido,
+    eliminarPedido,
     crearMenu,
     cargarMenus,
     cargarUsuarios,
@@ -69,6 +70,7 @@ routerAdmin.delete('/categoria/:id', validarJWT, eliminarCategoria);
 routerAdmin.get('/pedidos', validarJWT, cargarPedidos);
 routerAdmin.post('/pedidos', validarJWT, crearPedido);
 routerAdmin.put('/pedidos', validarJWT, editarPedido);
+routerAdmin.delete('/pedido/:id', validarJWT, eliminarPedido);
 
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);

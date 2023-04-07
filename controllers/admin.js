@@ -194,6 +194,31 @@ const editarPedido = async (req, res) => {
     }
 }
 
+// Eliminar pedido
+const eliminarPedido = async (req, res) => {
+    try {
+        let order = [];
+        const deleteOrder = await Pedido.findById(req.params.id);
+
+        if (!deleteOrder){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe un pedido con esta ID'
+            });
+        }
+        await Pedido.findByIdAndDelete(req.params.id);
+        res.status(200).json ({
+            ok: true,
+            msg:'¡Pedido eliminado!',
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Comuníquese con el administrador",
+        });
+    }
+}
+
 // Carga de Menús
 const cargarMenus = async (req,res) => {
     try {
@@ -316,6 +341,7 @@ module.exports = {
     crearPedido,
     cargarPedidos,
     editarPedido,
+    eliminarPedido,
     crearMenu,
     cargarMenus,
     cargarUsuarios,
