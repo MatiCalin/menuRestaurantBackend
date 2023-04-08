@@ -4,7 +4,6 @@ const { crearUsuario, loginUsuario } = require("../controllers/auth");
 const { validarCampos } = require("../middlewares/validarCampos");
 const routerAuth = express.Router();
 
-
 //creo mi sistema de rutas (una para registro y otra para login)
 
 routerAuth.post(
