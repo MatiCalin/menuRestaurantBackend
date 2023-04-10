@@ -1,6 +1,7 @@
 const express = require("express");
 const { check } = require("express-validator");
 const {
+    actualizarUsuario,
     cargarCategorias,
     crearCategoria,
     editarCategoria,
@@ -21,6 +22,8 @@ const { validarJWT } = require("../middlewares/validarJwt");
 const { validarJWTAdmin } = require("../middlewares/validarJwtAdmin");
 const {Schema} = require("mongoose");
 const routerAdmin = express.Router();
+
+
 
 routerAdmin.post ("/categoriaNew",
     [
@@ -74,6 +77,7 @@ routerAdmin.delete('/pedido/:id', validarJWT, eliminarPedido);
 
 routerAdmin.get('/Menus', validarJWT, cargarMenus);
 routerAdmin.get('/Usuarios',validarJWTAdmin ,cargarUsuarios);
+routerAdmin.put("/Usuarios/:id",validarJWTAdmin,   actualizarUsuario);
 
 routerAdmin.get("/nav", validarJWT ,verificarRol);
 routerAdmin.get("/verificar", validarJWTAdmin ,verificarAdmin);

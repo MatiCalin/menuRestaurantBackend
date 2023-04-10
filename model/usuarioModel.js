@@ -21,7 +21,10 @@ const UsuarioSchema = Schema({
         type: String,
         default: "usuario",
     },
-    
+    active: {
+        type: Boolean,
+        default: true,
+    }
 });
 
 module.exports = model("Usuario" , UsuarioSchema);

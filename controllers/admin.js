@@ -3,6 +3,25 @@ const Usuario = require('../model/usuarioModel');
 const Categoria = require('../model/categoriaModel');
 const Pedido = require('../model/pedidosModel');
 
+// Actualizar usuario 
+
+const actualizarUsuario = async (req, res) => {
+    const { id } = req.params;
+    const { active } = req.body;
+  
+    try {
+      const updatedUser = await Usuario.findByIdAndUpdate(
+        id,
+        { active },
+        { new: true }
+      );
+  
+      res.json(updatedUser);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ msg: "Hubo un error al actualizar el usuario" });
+    }
+  };
 // Carga de Categorías
 const cargarCategorias = async (req,res) => {
     try {
@@ -334,6 +353,7 @@ const editarMenu = async(req,res) =>{
 }
 
 module.exports = {
+    actualizarUsuario,
     cargarCategorias,
     crearCategoria,
     editarCategoria,

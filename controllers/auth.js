@@ -77,6 +77,14 @@ const loginUsuario = async (req,res) =>{
             })
         }
 
+        //verificar si el usuario está activo
+        if(!usuario.active){
+            return res.status(401).json({
+                ok: false,
+                msg: 'El usuario se encuentra bloqueado. Por favor, contacte al administrador',
+            });
+        }
+
         //generar JWT
         const payload = {
             id: usuario._id,
@@ -104,6 +112,7 @@ const loginUsuario = async (req,res) =>{
     }
 
 }
+
 
 module.exports = {
     crearUsuario,
