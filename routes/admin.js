@@ -50,19 +50,7 @@ routerAdmin.post ("/new",
 ],
 crearMenu
 );
-/*routerAdmin.post ("/updateMenu",
-    [
-        validarJWT,
-        check ("nombre","el nombre es obligatorio").not().isEmpty(),
-        check ("detalle","el detalle es obligatorio").not().isEmpty(),
-        check ("estado","el estado es obligatoria").not().isEmpty(),
-        check ("precio","el precio es obligatoria").not().isEmpty(),
-        check ("categorias","la categoria es obligatoria").not().isEmpty(),
-        check ("imageUrl","la url de la imagen es obligatoria").not().isEmpty(),
-        validarCampos
-    ],
-    editarMenu
-);*/
+
 
 routerAdmin.get('/categorias', validarJWT, cargarCategorias);
 
