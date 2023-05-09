@@ -16,14 +16,11 @@ const crearUsuario = async (req, res) => {
         }
         usuario = new Usuario (req.body);
 
-        //hacer la encriptacion de contraseña
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync(password, salt);
 
-        //aca guardo los usuarios en DB
         await usuario.save();
 
-        //generar JWT
         const payload = {
             id: usuario._id,
             name: usuario.name,
@@ -59,7 +56,6 @@ const loginUsuario = async (req,res) =>{
     try {
         const usuario = await Usuario.findOne({email});
 
-        //validando si existe el usuario
         if(!usuario){
             return res.status(400).json({
                 ok: false,
@@ -67,7 +63,6 @@ const loginUsuario = async (req,res) =>{
             })
         }
 
-        //ver si las contraseñas coinciden
         const validarContraseña = bcrypt.compareSync(password, usuario.password);
 
         if(!validarContraseña) {
@@ -77,7 +72,6 @@ const loginUsuario = async (req,res) =>{
             })
         }
 
-        //verificar si el usuario está activo
         if(!usuario.active){
             return res.status(401).json({
                 ok: false,
@@ -85,7 +79,6 @@ const loginUsuario = async (req,res) =>{
             });
         }
 
-        //generar JWT
         const payload = {
             id: usuario._id,
             name: usuario.name,

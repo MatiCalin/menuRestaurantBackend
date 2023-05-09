@@ -3,7 +3,7 @@ const Usuario = require('../model/usuarioModel');
 const Categoria = require('../model/categoriaModel');
 const Pedido = require('../model/pedidosModel');
 
-// Actualizar usuario 
+
 
 const actualizarUsuario = async (req, res) => {
     const { id } = req.params;
@@ -22,7 +22,7 @@ const actualizarUsuario = async (req, res) => {
       res.status(500).json({ msg: "Hubo un error al actualizar el usuario" });
     }
   };
-// Carga de Categorías
+
 const cargarCategorias = async (req,res) => {
     try {
         const categorias = await Categoria.find();
@@ -38,7 +38,7 @@ const cargarCategorias = async (req,res) => {
     }
 };
 
-// Crear Categoría
+
 const crearCategoria = async (req,res) =>{
     try {
         let categoria = new Categoria (req.body);
@@ -58,7 +58,7 @@ const crearCategoria = async (req,res) =>{
     }
 };
 
-// Editar categoría
+
 const editarCategoria = async (req, res) => {
     try {
         const editCategory = await Categoria.findById(req.body._id);
@@ -85,7 +85,7 @@ const editarCategoria = async (req, res) => {
     }
 }
 
-// Eliminar categoría
+
 const eliminarCategoria = async (req, res) => {
     try {
         let menu = [];
@@ -119,7 +119,6 @@ const eliminarCategoria = async (req, res) => {
     }
 }
 
-// Crear Pedido
 const crearPedido = async (req,res) =>{
     try {
         const user = await Usuario.find();
@@ -148,7 +147,6 @@ const crearPedido = async (req,res) =>{
     }
 };
 
-// Carga de Pedidos
 const cargarPedidos = async (req,res) => {
     try {
         const pedidos = await Pedido.find({}).populate("usuario", '-password -rol');
@@ -164,7 +162,6 @@ const cargarPedidos = async (req,res) => {
     }
 };
 
-// Crear menú
 const crearMenu = async (req,res) =>{
     try {
        let menu = new Menu (req.body);
@@ -184,7 +181,6 @@ const crearMenu = async (req,res) =>{
     }
 };
 
-// Editar pedido
 const editarPedido = async (req, res) => {
     try {
         const respOrder = await Pedido.findById(req.body._id);
@@ -213,7 +209,6 @@ const editarPedido = async (req, res) => {
     }
 }
 
-// Eliminar pedido
 const eliminarPedido = async (req, res) => {
     try {
         let order = [];
@@ -238,7 +233,6 @@ const eliminarPedido = async (req, res) => {
     }
 }
 
-// Carga de Menús
 const cargarMenus = async (req,res) => {
     try {
         const menus = await Menu.find({}).populate('categorias')
@@ -255,7 +249,6 @@ const cargarMenus = async (req,res) => {
     }
 };
 
-// Carga de Usuarios
 const cargarUsuarios = async(req, res) => {
     try {
         const Usuarios = await Usuario.find();
@@ -271,7 +264,6 @@ const cargarUsuarios = async(req, res) => {
     }
 };
 
-// Verificación de Roles
 const verificarRol = async(req, res) => {
     try {
         res.status(200).json({
@@ -286,7 +278,6 @@ const verificarRol = async(req, res) => {
     }
 };
 
-// Verificar Administrador
 const verificarAdmin = async(req, res) => {
     try {
         res.status(200).json({
@@ -301,7 +292,6 @@ const verificarAdmin = async(req, res) => {
     }
 };
 
-// Eliminación de menú
 const eliminarMenu =async (req,res) => {
     try {
         const menuEliminar = await Menu.findById(req.params.id)
@@ -324,7 +314,6 @@ const eliminarMenu =async (req,res) => {
     }
 };
 
-// Edición de menú
 const editarMenu = async(req,res) =>{
     try {
         const menuEditar = await Menu.findById(req.body._id);

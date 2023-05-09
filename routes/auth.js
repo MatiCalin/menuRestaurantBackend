@@ -5,7 +5,6 @@ const { validarCampos } = require("../middlewares/validarCampos");
 const routerAuth = express.Router();
 const { verificarEstado} = require("../middlewares/verificarEstado");
 
-//creo mi sistema de rutas (una para registro y otra para login)
 
 routerAuth.post(
     "/new", 
@@ -19,7 +18,7 @@ routerAuth.post(
         validarCampos,
     ],
     crearUsuario
-); //ruta para el registro de usuario
+); 
 
 routerAuth.post("/",
     [
@@ -29,7 +28,7 @@ routerAuth.post("/",
         validarCampos, verificarEstado,
     ] 
     
-    ,loginUsuario); //ruta para login de usuario
+    ,loginUsuario); 
     
 
 module.exports = routerAuth;

@@ -27,7 +27,6 @@ const routerAdmin = express.Router();
 
 routerAdmin.post ("/categoriaNew",
     [
-        //validarJWT,
         check ("nombre","El nombre es obligatorio").not().isEmpty(),
         check ("estado","El estado es obligatoria").not().isEmpty(),
         validarCampos
